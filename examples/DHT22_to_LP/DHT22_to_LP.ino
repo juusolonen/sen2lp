@@ -22,7 +22,8 @@ void setup() {
     Serial.begin(9600);
     dht.begin();
 
-    unsigned long customTimestamp = 1609459200;  // Example Unix timestamp
+    // Optional Unix timestamp. Probably not very useful to give it here..
+    unsigned long customTimestamp = 1609459200;  
     sensor = new Sensor(2, measurement, tags, customTimestamp);  // Create a Sensor object with space for 2 individual sensor readings
 
     // Allocate data for the struct at index 0 and 1
@@ -38,6 +39,10 @@ void loop() {
 
     sprintf(sensorHum->value, "%.2f", hum);
     sprintf(sensorTemp->value, "%.2f", temp);
+
+    // Optional.
+    unsigned long readingTimeStamp = 1609479200;
+    sensor->setTimestamp(readingTimeStamp);
 
     // Prepare a buffer to hold the formatted string (Line Protocol)
     char result[100];  // Ensure this is large enough to hold the final result
